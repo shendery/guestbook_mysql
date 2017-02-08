@@ -1,0 +1,62 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
+		<title>Guestbook</title>
+	</head>
+
+	<body>
+		<c:if test="${empty user}">
+			<p>Hello! please
+				<a href="${loginURL}">Sign in</a>
+				to include your name with greetings you post.</p>
+		</c:if>
+		<c:if test="${not empty user}">
+			<p>Hello, ${fn:escapeXml(user.nickname)}! (You can
+				<a href="${logoutURL}">sign out</a>.)</p>
+		</c:if>
+			
+		<form  method="post">
+			<input type="hidden" name="action" value="addGreeting">
+			<div><textarea name="content" rows="3" cols="60"></textarea></div>
+			<div><input type="submit" value="Post Greeting"/></div>
+			<input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
+		</form>
+
+		<form  method="post">
+			<input type="hidden" name="action" value="changeGuestBook">
+			<div><input type="text" name="guestbookName" value="${fn:escapeXml(guestbookName)}" list="books"/></div>
+			<div><input type="submit" value="Switch Guestbook"/></div>
+			<datalist id="books">
+			<c:forEach var="book" items="${books}" varStatus="status">
+				<option value="${book}">
+			</c:forEach>
+			</datalist> 
+		</form>
+
+		<c:if test="${empty greetings}">
+			<p>Guestbook '${fn:escapeXml(guestbookName)}' has no messages.</p>
+		</c:if>
+		<c:if test="${not empty greetings}">
+			<p>Messages in Guestbook '${fn:escapeXml(guestbookName)}'.</p>
+			<c:forEach var="greeting" items="${greetings}" varStatus="status">
+				<b>
+				<c:if test="${empty greeting.authorEmail}">
+					An anonymous person
+				</c:if>
+				<c:if test="${not empty greeting.authorEmail}">
+					${greeting.authorEmail}
+					<c:if test="${not empty user and user.userId eq greeting.authorId }">
+						(You)
+					</c:if>
+				</c:if>
+				</b> wrote:<br>
+				<blockquote>${fn:escapeXml(greeting.content)}</blockquote>
+			</c:forEach>
+		</c:if>
+	</body>
+
+</html>
