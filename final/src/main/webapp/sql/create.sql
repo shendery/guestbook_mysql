@@ -5,5 +5,5 @@ CREATE  TABLE IF NOT EXISTS GREETING (
 	authorEmail	VARCHAR(100) NULL ,
 	content		VARCHAR(200) NOT NULL ,
 	created		TIMESTAMP ,
-	PRIMARY KEY (`id`) 
+	PRIMARY KEY (id) 
 ) ENGINE = InnoDB;

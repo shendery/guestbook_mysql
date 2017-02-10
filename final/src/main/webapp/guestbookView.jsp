@@ -29,12 +29,12 @@
 		<form  method="post">
 			<input type="hidden" name="action" value="changeGuestBook">
 			<div><input type="text" name="guestbookName" value="${fn:escapeXml(guestbookName)}" list="books"/></div>
-			<div><input type="submit" value="Switch Guestbook"/></div>
 			<datalist id="books">
 			<c:forEach var="book" items="${books}" varStatus="status">
-				<option value="${book}">
+				<option>${fn:escapeXml(book)}</option>
 			</c:forEach>
 			</datalist> 
+			<div><input type="submit" value="Switch Guestbook"/></div>
 		</form>
 
 		<c:if test="${empty greetings}">
@@ -48,7 +48,7 @@
 					An anonymous person
 				</c:if>
 				<c:if test="${not empty greeting.authorEmail}">
-					${greeting.authorEmail}
+					${fn:escapeXml(greeting.authorEmail)}
 					<c:if test="${not empty user and user.userId eq greeting.authorId }">
 						(You)
 					</c:if>

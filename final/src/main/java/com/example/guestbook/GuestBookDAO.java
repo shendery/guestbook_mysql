@@ -49,7 +49,7 @@ public class GuestBookDAO {
 
 	public List<String> existingBooks() throws SQLException, ServletException {
 		LinkedList<String> result = new LinkedList<>();
-		String sql = "SELECT DISTINCT book FROM GREETING";
+		String sql = "SELECT DISTINCT book FROM GREETING ORDER BY book";
 		try (Connection conn = DriverManager.getConnection(jdbcUrl());
 		     Statement select = conn.createStatement();
 		     ResultSet rs = select.executeQuery(sql)) {
@@ -63,7 +63,7 @@ public class GuestBookDAO {
 
 	public List<Greeting> findGreetingsIn(String book) throws SQLException, ServletException {
 		LinkedList<Greeting> result = new LinkedList<>();
-		String sql = "SELECT * FROM GREETING WHERE book = ?";
+		String sql = "SELECT * FROM GREETING WHERE book = ? ORDER BY created DESC";
 		try (Connection conn = DriverManager.getConnection(jdbcUrl());
 		     PreparedStatement create = conn.prepareStatement(sql)) {
 			create.setString(1, book);
