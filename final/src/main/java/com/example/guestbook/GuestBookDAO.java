@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class GuestBookDAO {
 					String authorId = rs.getString("authorId");
 					String authorEmail = rs.getString("authorEmail");
 					String content = rs.getString("content");
-					Date created = rs.getDate("created");	
+					Timestamp created = rs.getTimestamp("created");	
 					Greeting g = new Greeting(id, book, authorId, authorEmail, content, created);
 					result.add(g);
 				}				

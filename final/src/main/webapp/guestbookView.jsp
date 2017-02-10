@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 	<head>
@@ -41,7 +42,7 @@
 			<p>Guestbook '${fn:escapeXml(guestbookName)}' has no messages.</p>
 		</c:if>
 		<c:if test="${not empty greetings}">
-			<p>Messages in Guestbook '${fn:escapeXml(guestbookName)}'.</p>
+			<p>Messages in Guestbook '${fn:escapeXml(guestbookName)}'<hr></p>
 			<c:forEach var="greeting" items="${greetings}" varStatus="status">
 				<b>
 				<c:if test="${empty greeting.authorEmail}">
@@ -53,7 +54,7 @@
 						(You)
 					</c:if>
 				</c:if>
-				</b> wrote:<br>
+				</b> wrote: (<fmt:formatDate value="${greeting.created}" type="both" />)<br>
 				<blockquote>${fn:escapeXml(greeting.content)}</blockquote>
 			</c:forEach>
 		</c:if>

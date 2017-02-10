@@ -1,6 +1,6 @@
 package com.example.guestbook.entity;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Greeting {
 
@@ -9,9 +9,9 @@ public class Greeting {
 	private String authorId;
 	private String authorEmail;
 	private String content;
-	private Date created;
+	private Timestamp created;
 
-	public Greeting(Long id, String book, String authorId, String authorEmail, String content, Date created) {
+	public Greeting(Long id, String book, String authorId, String authorEmail, String content, Timestamp created) {
 		this.id = id;
 		this.book = book;
 		this.authorId = authorId;
@@ -20,11 +20,11 @@ public class Greeting {
 		this.created = created;
 	}
 
-	public Date getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(Timestamp created) {
 		this.created = created;
 	}
 
