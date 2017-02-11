@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -38,13 +37,12 @@ public class GuestBookDAO {
 	public void addGreeting(String book, String authorId, String authorEmail, String content) throws SQLException, ServletException {
 		String sql = "INSERT INTO GREETING(book, authorId, authorEmail, content) VALUES(?, ?, ?, ?)";
 		try (Connection conn = DriverManager.getConnection(jdbcUrl());
-		     PreparedStatement create = conn.prepareStatement(sql)) {
+			 PreparedStatement create = conn.prepareStatement(sql)) {
 			create.setString(1, book);
 			create.setString(2, authorId);
 			create.setString(3, authorEmail);
 			create.setString(4, content);
-			int result = create.executeUpdate();
-			create.close();
+			create.executeUpdate();
 		}
 	}
 
@@ -52,8 +50,8 @@ public class GuestBookDAO {
 		LinkedList<String> result = new LinkedList<>();
 		String sql = "SELECT DISTINCT book FROM GREETING ORDER BY book";
 		try (Connection conn = DriverManager.getConnection(jdbcUrl());
-		     Statement select = conn.createStatement();
-		     ResultSet rs = select.executeQuery(sql)) {
+			 Statement select = conn.createStatement();
+			 ResultSet rs = select.executeQuery(sql)) {
 			while (rs.next()) {
 				result.add(rs.getString("book"));
 			}
@@ -66,7 +64,7 @@ public class GuestBookDAO {
 		LinkedList<Greeting> result = new LinkedList<>();
 		String sql = "SELECT * FROM GREETING WHERE book = ? ORDER BY created DESC";
 		try (Connection conn = DriverManager.getConnection(jdbcUrl());
-		     PreparedStatement create = conn.prepareStatement(sql)) {
+			 PreparedStatement create = conn.prepareStatement(sql)) {
 			create.setString(1, book);
 			try (ResultSet rs = create.executeQuery()) {
 				while (rs.next()) {
@@ -83,5 +81,4 @@ public class GuestBookDAO {
 		
 		return result;
 	}
-
 }
