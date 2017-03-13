@@ -10,17 +10,17 @@
 
 	<!-- [START set_versions] -->
 	<properties>
- 
+		<appengine_project>guestbook-155616</appengine_project>
 		<INSTANCE_CONNECTION_NAME>guestbook-155616:europe-west1:comptoirs</INSTANCE_CONNECTION_NAME>
 		<user>isis</user>
 		<password>Castres81</password>
 		<database>guestbook</database>
 
 		<appengine.app.version>1</appengine.app.version>
-		<appengine.sdk.version>1.9.48</appengine.sdk.version>
+		<appengine.sdk.version>1.9.49</appengine.sdk.version>
 
-		<objectify.version>5.1.5</objectify.version>
-		<guava.version>18.0</guava.version>
+		<objectify.version>5.1.14</objectify.version>
+		<guava.version>21.0</guava.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -50,7 +50,7 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<version>3.0-alpha-1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -107,7 +107,7 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<version>3.2</version>
+				<version>3.6.0</version>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<source>1.7</source>
@@ -117,7 +117,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
+				<version>3.0.0</version>
 				<configuration>
 					<archiveClasses>true</archiveClasses>
 					<webResources>

@@ -30,6 +30,7 @@ public class GuestbookControllerServlet extends HttpServlet {
 		}
 		request.setAttribute("guestbookName", guestbookName);
 
+		// Service d'authentification Google
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 		request.setAttribute("user", user);

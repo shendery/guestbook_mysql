@@ -21,6 +21,7 @@
 		</c:if>
 			
 		<form  method="post">
+			<!-- l'action est utilisée par le contrôleur -->
 			<input type="hidden" name="action" value="addGreeting">
 			<div><textarea name="content" rows="3" cols="60"></textarea></div>
 			<div><input type="submit" value="Post Greeting"/></div>
@@ -28,6 +29,7 @@
 		</form>
 
 		<form  method="post">
+			<!-- l'action est utilisée par le contrôleur -->
 			<input type="hidden" name="action" value="changeGuestBook">
 			<div><input type="text" name="guestbookName" value="${fn:escapeXml(guestbookName)}" list="books"/></div>
 			<datalist id="books">
