@@ -8,8 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 
 public class GuestBookDAO {
@@ -31,6 +33,7 @@ public class GuestBookDAO {
 			// Set the url with the local MySQL database connection url when running locally
 			url = System.getProperty("ae-cloudsql.local-database-url");
 		}
+		System.err.println(url);
 		return url;
 	}
 
@@ -81,4 +84,20 @@ public class GuestBookDAO {
 		
 		return result;
 	}
+	
+	public Map<String, Integer> getStatistics() throws SQLException, ServletException {
+		HashMap<String, Integer> result = new HashMap<>();
+		String sql = "SELECT book, COUNT(*) AS howMany FROM GREETING GROUP BY book";
+		try (Connection conn = DriverManager.getConnection(jdbcUrl());
+			Statement stats = conn.createStatement();
+			ResultSet rs = stats.executeQuery(sql)) {
+				while (rs.next()) {
+					String book = rs.getString("book");
+					int howMany = rs.getInt("howMany");
+					result.put(book, howMany);
+				}				
+			}		
+		return result;
+	}
+
 }

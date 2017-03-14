@@ -54,7 +54,8 @@ public class GuestbookControllerServlet extends HttpServlet {
 			List<Greeting> greetings = dao.findGreetingsIn(guestbookName);
 			request.setAttribute("greetings", greetings);
 			List<String> books = dao.existingBooks();
-			request.setAttribute("books", books);			
+			request.setAttribute("books", books);
+			request.setAttribute("statistics", dao.getStatistics());
 		} catch (SQLException | ServletException ex) {
 			Logger.getLogger(GuestbookControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
 		}
