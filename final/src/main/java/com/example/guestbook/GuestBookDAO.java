@@ -16,7 +16,9 @@ import javax.servlet.ServletException;
 
 public class GuestBookDAO {
 
-	private String jdbcUrl() throws ServletException {
+    // Détermine l'URL du serveur MySQL à utiliser
+    // Teste si on est en mode développement ou en mode production
+    private String jdbcUrl() throws ServletException {
 		String url;
 		if (System.getProperty("com.google.appengine.runtime.version").startsWith("Google App Engine/")) {
 			// Check the System properties to determine if we are running on appengine or not
@@ -37,6 +39,7 @@ public class GuestBookDAO {
 		return url;
 	}
 
+        
 	public void addGreeting(String book, String authorId, String authorEmail, String content) throws SQLException, ServletException {
 		String sql = "INSERT INTO GREETING(book, authorId, authorEmail, content) VALUES(?, ?, ?, ?)";
 		try (Connection conn = DriverManager.getConnection(jdbcUrl());
@@ -85,19 +88,5 @@ public class GuestBookDAO {
 		return result;
 	}
 	
-	public Map<String, Integer> getStatistics() throws SQLException, ServletException {
-		HashMap<String, Integer> result = new HashMap<>();
-		String sql = "SELECT book, COUNT(*) AS howMany FROM GREETING GROUP BY book";
-		try (Connection conn = DriverManager.getConnection(jdbcUrl());
-			Statement stats = conn.createStatement();
-			ResultSet rs = stats.executeQuery(sql)) {
-				while (rs.next()) {
-					String book = rs.getString("book");
-					int howMany = rs.getInt("howMany");
-					result.put(book, howMany);
-				}				
-			}		
-		return result;
-	}
 
 }
