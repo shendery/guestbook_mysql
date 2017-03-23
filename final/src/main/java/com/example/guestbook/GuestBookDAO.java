@@ -88,5 +88,18 @@ public class GuestBookDAO {
 		return result;
 	}
 	
-
+	public Map<String, Integer> getStats() throws SQLException, ServletException {
+            HashMap<String, Integer> results = new HashMap<>();
+            String request = "select book, count(*) as val from GREETING group by book";
+            try (Connection conn = DriverManager.getConnection(jdbcUrl());
+                Statement stats = conn.createStatement();
+                ResultSet rs = stats.executeQuery(request)) {
+                    while (rs.next()) {
+                        String book = rs.getString("book");
+                        int val = rs.getInt("val");
+                        results.put(book, val);
+                    }				
+                }		
+            return results;
+	}
 }

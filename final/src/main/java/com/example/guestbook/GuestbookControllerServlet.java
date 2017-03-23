@@ -62,7 +62,8 @@ public class GuestbookControllerServlet extends HttpServlet {
                         // On transmet ces informations à la vue
 			request.setAttribute("books", books);
 			request.setAttribute("greetings", greetings);
-			//request.setAttribute("statistics", dao.getStatistics());
+			request.setAttribute("statistics", dao.getStats());
+                        
 		} catch (SQLException | ServletException ex) {
 			Logger.getLogger(GuestbookControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
 		}

@@ -14,8 +14,8 @@
 		<appengine_project>trim-descent-156913</appengine_project>
 		<!-- A remplacer par la configuration de votre base de données -->		
 		<INSTANCE_CONNECTION_NAME>trim-descent-156913:europe-west1:guestbookjs</INSTANCE_CONNECTION_NAME>
-		<user>root</user>
-		<password></password>
+		<user>admin</user>
+		<password>admin</password>
 		<database>guestbook</database>
 
 		<appengine.app.version>1</appengine.app.version>

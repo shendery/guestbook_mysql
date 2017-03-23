@@ -5,9 +5,36 @@
 
 <html>
 	<head>
-		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
-		<title>Guestbook</title>
+            <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
+            <title>Guestbook</title>
+                
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+                    google.charts.load('current', {'packages': ['corechart']});
+                    google.charts.setOnLoadCallback(drawPieChart);
 
+                    function drawPieChart() {
+                        var data = google.visualization.arrayToDataTable([
+                            <c:forEach var="entry" varStatus="status" items="${statistics}">
+                                    <c:if test="${status.first}">
+                                            ['Guestbook', '# of messages'],
+                                    </c:if>
+                                            ['${entry.key}', ${entry.value}]
+                                    <c:if test="${not status.last}">
+                                                                                    ,
+                                    </c:if>
+                            </c:forEach>
+                        ]);
+
+                        var options = {
+                            title: 'Messages in guestbooks'
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                        chart.draw(data, options);
+                    }
+		</script>
 	</head>
 
 	<body>
@@ -62,7 +89,7 @@
 		</c:forEach>
 	</c:if>
 			
-	<div id="piechart" style="width: 500px; height: 300px;"></div>
+        <div id="piechart" style="width: 500px; height: 300px;"></div>
 </body>
 
 </html>
